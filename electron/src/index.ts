@@ -14,6 +14,7 @@ var splashWindow: BrowserWindow;
 
 function init() {
     initializeRemote();
+    require('electron-react-titlebar/main').initialize();
     if (setupEvents.handleSquirrelEvent()) return false;
     splashWindow = new BrowserWindow({
         width: 260,
@@ -39,8 +40,8 @@ function init() {
             minHeight: 619,
             minWidth: 886,
             darkTheme: true,
-            frame: false,
-            titleBarStyle: 'hidden',
+            frame: true,
+            //titleBarStyle: 'hidden',
             show: false,
             webPreferences: {
                 nodeIntegration: true,
@@ -50,6 +51,7 @@ function init() {
                 nativeWindowOpen: true
             }
         });
+        appWindow.menuBarVisible = false;
         loadURL(appWindow);
         appWindow.webContents.setWindowOpenHandler((details)=>{
             return {
